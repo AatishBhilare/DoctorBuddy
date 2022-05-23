@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{%block blockstyle%}
+<style type="text/css">
+body {
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;
+}
+
+.main-body {
+    padding: 15px;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col,
+.gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.mb-3,
+.my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+
+
+
+
+
+</style>
+{%endblock%}
+{%block maincontent%}
+<div class="container-fluid">
+    <div class="main-body">
+        <!-- Breadcrumb>
+        <nav aria-label="breadcrumb" class="main-breadcrumb ">
+            <ol class="breadcrumb b-bg-c">
+                <li class="breadcrumb-item"><a href="{%url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Take An Appointment</li>
+            </ol>
+        </nav>
+        <header>
+            <h2>Take An Appointment</h2>
+        </header>
+        <-->
+        <div class="row gutters-sm">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3 style="text-align: center;">Make Report</h3>
+                        <hr>
+
+                        <form method="POST" enctype="multipart/form-data">
+                            {%csrf_token%}
+                            {{form.errors}}
+                            {% if formset.errors %}
+                            {{formset.errors}}
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Doctor ID</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{request.user.username}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Patient ID</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.patient}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Checkup Report</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.checkup_report}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Report Required</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.report_required}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Prescription</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ formset.management_form }}
+                                    <div class="row" style="margin-bottom: 15px;">
+                                        <div class="col-sm-2">
+                                            <a id="addmed" class="btn btn-sm btn-clr">+ ADD</a>
+                                            <a id="minusmedbtn" class="btn btn-sm btn-secondary">- Delete</a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            Medicine Type
+                                        </div>
+                                        <div class="col-sm-2">
+                                            Medicine Name
+                                        </div>
+                                        <div class="col-sm-2">
+                                            Medicine Timing
+                                        </div>
+                                        <div class="col-sm-3">
+                                            Take Before/After Food
+                                        </div>
+                                    </div>
+                                    {% for form in formset %}
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{form.med_type}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{form.med_name}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{form.med_timing}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{form.med_bool}}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div id="meddiv"></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Doctor Suggestion</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.d_suggestion}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm-12 text-secondary">
+                                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Close</a>
+                                    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var form_num = 0;
+    $(document).ready(function() {
+     	$("#minusmedbtn").hide();
+       $("#addmed").click(function() {
+       form_num ++;
+       $("input[id='id_form-TOTAL_FORMS']").attr('value', form_num + 1); 
+          $("#meddiv").append('<div class="row" id="id_form-'+ form_num +'"><div class="col-sm-2"></div><div class="col-sm-2"><select name="form-'+ form_num +'-med_type" class="form-control" id="id_form-'+ form_num +'-med_type"><option value="">---------</option><option value="1" selected="">Tablet</option><option value="2">Capsule</option><option value="3">Syrup</option><option value="4">Powder</option></select></div><div class="col-sm-2"><input type="text" name="form-'+ form_num +'-med_name" class="form-control" maxlength="255" id="id_form-'+ form_num +'-med_name"></div><div class="col-sm-2"><ul id="id_form-'+ form_num +'-med_timing"><li><label for="id_form-'+ form_num +'-med_timing_0"><input type="checkbox" name="form-'+ form_num +'-med_timing" value="1" id="id_form-'+ form_num +'-med_timing_0"> Morning</label></li><li><label for="id_form-'+ form_num +'-med_timing_1"><input type="checkbox" name="form-'+ form_num +'-med_timing" value="2" id="id_form-'+ form_num +'-med_timing_1"> Afternoon</label></li><li><label for="id_form-'+ form_num +'-med_timing_2"><input type="checkbox" name="form-'+ form_num +'-med_timing" value="3" id="id_form-'+ form_num +'-med_timing_2"> Evening</label></li><li><label for="id_form-'+ form_num +'-med_timing_3"><input type="checkbox" name="form-'+ form_num +'-med_timing" value="4" id="id_form-'+ form_num +'-med_timing_3"> Night</label></li></ul></div><div class="col-sm-3"><select name="form-'+ form_num +'-med_bool" class="form-control" id="id_form-'+ form_num +'-med_bool"><option value="" selected="">---------</option><option value="True">Before</option><option value="False">After</option></select></div></div>');         
+
+            if (form_num == 1)
+		{
+			$("#minusmedbtn").show();
+		}
+       });
+
+       $("#minusmedbtn").click(function() {
+       	var xval = $("input[id='id_form-TOTAL_FORMS']").val() - 1;
+       	var ddivid = "id_form-" + xval +""
+
+
+       if ($('#id_form-TOTAL_FORMS').val() > 1) {
+       		$("#"+ddivid+"").remove();
+       		$("input[id='id_form-TOTAL_FORMS']").val(xval);
+       		form_num--;
+			}
+		if (form_num == 0)
+		{
+			$("#minusmedbtn").hide();
+		}
+		});
+
+    });
+
+
+
+
+
+
+</script>
+
+{%endblock%}
+

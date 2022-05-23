@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{%block blockstyle%}
+<style type="text/css">
+body {
+    background: #eee;
+}
+
+.main-body {
+    padding: 15px;
+}
+
+.table-wrapper {
+    width: 100%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+
+.table-title .add-new i {
+    margin-right: 4px;
+}
+
+table.table tr th,
+table.table tr td {
+    border-color: #e9e9e9;
+}
+
+table.table th:last-child {
+    width: 100px;
+}
+
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+
+table.table .form-control.error {
+    border-color: #f50000;
+}
+
+</style>
+{%endblock%}
+{%block maincontent%}
+<div class="container-fluid">
+    <div class="main-body">
+        <!-- Breadcrumb>
+        <nav aria-label="breadcrumb" class="main-breadcrumb ">
+            <ol class="breadcrumb b-bg-c">
+                <li class="breadcrumb-item"><a href="{%url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Hospital Staff</li>
+            </ol>
+        </nav>
+        <header>
+            <h2>ADD Hospital Staff</h2>
+        </header>
+        <-->
+        <div class="row gutters-sm">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3 style="text-align: center; padding: 10px;">Add Hospital Staff</h3>
+                        <hr>
+                        <form method="POST" enctype="multipart/form-data" >
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Username</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.username}}
+                                    {% if form.username.errors %}
+                                    <small class="help-block-none">{{form.username.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">First Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.first_name}}
+                                    {% if form.first_name.errors %}
+                                    <small class="help-block-none">{{form.first_name.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Last Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.last_name}}
+                                    {% if form.last_name.errors %}
+                                    <small class="help-block-none">{{form.last_name.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.email}}
+                                    {% if form.email.errors %}
+                                    <small class="help-block-none">{{form.email.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mobile</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.user_mobile}}
+                                    {% if form.user_mobile.errors %}
+                                    <small class="help-block-none">{{form.user_mobile.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.user_address}}
+                                    {% if form.user_address.errors %}
+                                    <small class="help-block-none">{{form.user_address.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Image</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.user_image}}
+                                    {% if form.user_image.errors %}
+                                    <small class="help-block-none">{{form.user_image.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Password</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.password1}}
+                                    {% if form.password1.errors %}
+                                    <small class="help-block-none">{{form.password1.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Confirm Password</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{form.password2}}
+                                    {% if form.password2.errors %}
+                                    <small class="help-block-none">{{form.password2.errors}}</small>
+                                    {% endif%}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-9 text-secondary">
+                                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Close</a>
+                                    <input type="submit" name="submit" value="submit" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{%block blockstyle%}
+<style type="text/css">
+body {
+    background: #eee;
+}
+
+#home {
+    background: url('../static/img/bg.jpg') no-repeat center center fixed;
+    min-height: 665px;
+    position: relative;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -0-background-size: cover;
+    background-size: cover;
+}
+
+.main-body {
+    padding: 15px;
+}
+
+p {
+    font-size: 18px;
+    color: #777;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#services {
+    /*background: no-repeat fixed;*/
+    background-color: yellow;
+    background-size: cover;
+    min-height: 758px;
+    position: relative;
+}
+
+.apt-btn {
+    text-decoration: none;
+    color: white;
+    border: solid white 2px;
+    padding: 10px;
+    background-color: rgba(80,80,80,0.5)
+}
+
+.apt-btn:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(42,42,114,0.4);
+}
+
+.btn-clr {
+    background-color: #1d72fc;
+    color: white;
+}
+
+.btn-clr:hover {
+    background-color: #2a2a72;
+    color: white;
+}
+
+</style>
+{%endblock%}
+{%block maincontent%}
+{%if not request.user.is_patient %}
+<div class="container-fluid">
+    <div class="main-body">
+        <!-- Breadcrumb>
+        <nav aria-label="breadcrumb" class="main-breadcrumb ">
+            <ol class="breadcrumb b-bg-c">
+                <li class="breadcrumb-item active" aria-current="page">Home /</li>
+            </ol>
+        </nav>
+        <-->
+        <div class="row" style="text-align: center;">
+            <div class="col-sm-6 col-md-6">
+                <div class="card" style="padding: 30px;">
+                    <div class="card-body">
+                        <h5>Xray Detection</h5><br>
+                        <a href="#" class="btn btn-clr">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="card" style="padding: 30px;">
+                    <div class="card-body">
+                        <h5>Results</h5><br>
+                        <a href="{%url 'xrayresult' %}" class="btn btn-clr">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{%endblock%}

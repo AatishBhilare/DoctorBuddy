@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{%block blockstyle%}
+<style type="text/css">
+body {
+    background: #eee;
+}
+
+.main-body {
+    padding: 15px;
+}
+
+.table-wrapper {
+    width: 100%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+
+.table-title .add-new i {
+    margin-right: 4px;
+}
+
+table.table tr th,
+table.table tr td {
+    border-color: #e9e9e9;
+}
+
+table.table th:last-child {
+    width: 100px;
+}
+
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+
+table.table .form-control.error {
+    border-color: #f50000;
+}
+
+.btn-clr {
+    text-decoration: none;
+    background-color: #1d72fc;
+    color: white;
+}
+
+.btn-clr:hover {
+    text-decoration: none;
+    background-color: #2a2a72;
+    color: white;
+}
+
+
+</style>
+{%endblock%}
+{%block maincontent%}
+<div class="container-fluid">
+    <div class="main-body">
+        <!-- Breadcrumb>
+        <nav aria-label="breadcrumb" class="main-breadcrumb ">
+            <ol class="breadcrumb b-bg-c">
+                <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Hospital Staff</li>
+            </ol>
+        </nav>
+        <-->
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="text-align: center;">X-Ray Report Result</h3>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div style="overflow: scroll;">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Report ID</th>
+                        <th>Patient Name</th>
+                        <th>Doctor ID</th>
+                        <th>Date</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for xObj in xObj_all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{xObj.report.id}}</td>
+                        <td>{{xObj.report.patient.username}}</td>
+                        <td>{{xObj.report.doctor}}</td>
+                        <td>{{xObj.report.report_date}}</td>
+                        <td>
+                            <a class="btn-sm btn-clr" href="{% url 'singleresult' xObj.id %}">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DoctorBuddy</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #045de9;
+        background-image: linear-gradient(290deg, #045de9 0%, #059dc7 74%);
+        height: 100vh;
+    }
+
+    #login .container #login-row #login-column #login-box {
+        margin-top: 60px;
+        border: 1px solid #9C9C9C;
+        background-color: #EAEAEA;
+    }
+
+    #login .container #login-row #login-column #login-box #login-form {
+        padding: 20px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    #login .container #login-row #login-column #login-box #login-form #register-link {
+        margin-top: -85px;
+    }
+
+    .btn-clr {
+        background-color: #1d72fc;
+        color: white;
+    }
+
+    .btn-clr:hover {
+        background-color: #2a2a72;
+        color: white;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <h2 class="text-center text-white pt-5">DoctorBuddy</h2>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            {%csrf_token%}
+                            <h3 class="text-center" style="color: #045de9;">Login</h3>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <p>{{ message }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="loginUsername" style="color: #2a2a72;">Username:</label><br>
+                                <input type="text" name="loginUsername" id="loginUsername" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword" style="color: #2a2a72;">Password:</label><br>
+                                <input type="Password" name="loginPassword" id="loginPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-lg btn-block login-button btn-clr" value="submit">
+                            </div>
+                            <div class="form-group">
+                                <a href="{% url 'registerpatient' %}" style="color: #2a2a72;">Patients Register here</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
